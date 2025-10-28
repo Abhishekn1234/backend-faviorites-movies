@@ -3,18 +3,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// ✅ Add non-null assertions (!) to tell TypeScript these exist
+console.log("🧩 Connecting to:", process.env.DB_HOST, ":", process.env.DB_PORT);
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME!,   // database name
-  process.env.DB_USER!,   // username
-  process.env.DB_PASS!,   // password
+  process.env.DB_NAME!,
+  process.env.DB_USER!,
+  process.env.DB_PASS!,
   {
     host: process.env.DB_HOST!,
     port: Number(process.env.DB_PORT) || 4000,
     dialect: "mysql",
     dialectOptions: {
       ssl: {
-        require: true, // TiDB Cloud requires SSL
+        require: true,
         rejectUnauthorized: false,
       },
     },
@@ -22,7 +23,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// ✅ Connection test (safe and clean)
 sequelize
   .authenticate()
   .then(() => console.log("✅ Connected to TiDB Cloud MySQL successfully"))
