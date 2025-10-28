@@ -1,4 +1,4 @@
-import { sequelize } from "../config/database";
+import sequelize  from "../config/database";
 import { Favorite } from "./favoritemodel";
 
 export { sequelize, Favorite };
