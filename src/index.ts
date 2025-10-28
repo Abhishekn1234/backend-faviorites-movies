@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import favoritesRouter from "./routes/faviorites";
-import { sequelize } from "./config/database";
+import  sequelize from "./config/database";
 
 dotenv.config();
 
