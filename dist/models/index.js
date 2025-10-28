@@ -8,7 +8,6 @@ const database_1 = __importDefault(require("../config/database"));
 exports.sequelize = database_1.default;
 const favoritemodel_1 = require("./favoritemodel");
 Object.defineProperty(exports, "Favorite", { enumerable: true, get: function () { return favoritemodel_1.Favorite; } });
-// optional helper to sync/pass options
 const syncDB = async (opts = { alter: true }) => {
     await database_1.default.sync(opts);
 };

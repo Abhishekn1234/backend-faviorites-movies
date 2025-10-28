@@ -19,7 +19,6 @@ const PORT = Number(process.env.PORT || 4000);
 (async () => {
     try {
         await database_1.default.authenticate();
-        // NOTE: For dev we sync with alter:true. For production use migrations.
         await database_1.default.sync({ alter: true });
         console.log("Database connected and models synced");
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

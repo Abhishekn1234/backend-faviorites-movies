@@ -4,16 +4,11 @@ exports.deleteFavorite = exports.updateFavorite = exports.createFavorite = expor
 const favoritemodel_1 = require("../models/favoritemodel");
 const favorite_schema_1 = require("../validation/favorite.schema");
 const sequelize_1 = require("sequelize");
-/**
- * GET /api/favorites?offset=0&limit=20&search=...&type=Movie
- * returns { total, items }
- */
 const getFavorites = async (req, res) => {
     try {
         const limit = Math.min(Number(req.query.limit) || 20, 100);
         const offset = Number(req.query.offset) || 0;
         const where = {};
-        // optional search (title, director)
         if (req.query.search) {
             const q = String(req.query.search);
             where[sequelize_1.Op.or] = [
@@ -60,7 +55,6 @@ const createFavorite = async (req, res) => {
     }
     catch (err) {
         if (err?.issues) {
-            // Zod validation error
             return res.status(400).json({ error: err.errors ?? err.message, details: err.issues });
         }
         res.status(400).json({ error: err.message });

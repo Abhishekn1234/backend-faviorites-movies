@@ -3,17 +3,14 @@ import { Favorite } from "../models/favoritemodel";
 import { favoriteSchema } from "../validation/favorite.schema";
 import { Op } from "sequelize";
 
-/**
- * GET /api/favorites?offset=0&limit=20&search=...&type=Movie
- * returns { total, items }
- */
+
 export const getFavorites = async (req: Request, res: Response) => {
   try {
     const limit = Math.min(Number(req.query.limit) || 20, 100);
     const offset = Number(req.query.offset) || 0;
 
     const where: any = {};
-    // optional search (title, director)
+    
     if (req.query.search) {
       const q = String(req.query.search);
       where[Op.or] = [
@@ -57,7 +54,7 @@ export const createFavorite = async (req: Request, res: Response) => {
     res.status(201).json(created);
   } catch (err: any) {
     if (err?.issues) {
-      // Zod validation error
+      
       return res.status(400).json({ error: err.errors ?? err.message, details: err.issues });
     }
     res.status(400).json({ error: err.message });

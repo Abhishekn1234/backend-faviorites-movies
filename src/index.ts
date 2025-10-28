@@ -20,7 +20,7 @@ const PORT = Number(process.env.PORT || 4000);
 (async () => {
   try {
     await sequelize.authenticate();
-    // NOTE: For dev we sync with alter:true. For production use migrations.
+    
     await sequelize.sync({ alter: true });
     console.log("Database connected and models synced");
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
